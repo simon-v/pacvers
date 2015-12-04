@@ -1,0 +1,17 @@
+#!/bin/sh
+depth=1
+if [ "$1" == "-d" ]; then
+	depth=$2
+	shift 2
+fi
+for pkg in $@; do
+	for name in `pactree -lud$depth $pkg | cut -f1 -d\ `; do
+		pacman -Qe $name > /dev/null
+		if [ $? == 0 ]; then
+			echo -n "* "
+			pacman -Qe $name
+		else
+			pacman -Qd $name
+		fi
+	done
+done
