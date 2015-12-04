@@ -1,6 +1,14 @@
 #!/bin/sh
-depth=1
-if [ "$1" == "-d" ]; then
+# Description: Print pacman package versions, including dependencies
+# Author: Simon Volpert <simon@simonvolpert.com>
+# License: GPL
+depth=0
+if [ "$1" == "-h" ]; then
+	echo "pacvers: print pacman package versions, including dependencies"
+	echo "Usage: pacvers [-d DEPH] NAME..."
+	echo "-d	Dependency depth (default: 0, only print named package versions)"
+	exit
+elif [ "$1" == "-d" ]; then
 	depth=$2
 	shift 2
 fi
